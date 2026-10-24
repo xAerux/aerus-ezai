@@ -1,0 +1,27 @@
+{
+  "name": "ez-ai",
+  "private": true,
+  "version": "1.0.0-beta.6",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty",
+    "test:recommendations": "node --test tests/modelRecommendations.test.ts",
+    "test:knowledge": "node --test tests/knowledgeCatalog.test.ts",
+    "test:free": "node --test tests/freeOptions.test.ts tests/installerCatalog.test.ts",
+    "test": "node --test tests/modelRecommendations.test.ts tests/knowledgeCatalog.test.ts tests/valueEngine.test.ts tests/freeOptions.test.ts tests/installerCatalog.test.ts tests/localModelCatalog.test.ts tests/localAgents.test.ts tests/pricingWorkspace.test.ts tests/creative.test.ts tests/pricingUpgrade.test.ts tests/claudeEfficiency.test.ts tests/instructionInstaller.test.ts tests/companionStatus.test.ts tests/buildIdentity.test.ts tests/distributionCompliance.test.ts tests/serviceErrors.test.ts tests/companionStatusService.test.ts tests/storageMigration.test.ts tests/codexCrunch.test.ts"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "6.1.2",
+    "lucide-react": "0.468.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vite": "8.3.4"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}

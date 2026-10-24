@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+release/
+
+/build-tools/
+/release-artifacts/
+
+# Disposable test residue and release binaries
+.preview-test.*
+*.log
+EZ-AI-Setup-*.exe

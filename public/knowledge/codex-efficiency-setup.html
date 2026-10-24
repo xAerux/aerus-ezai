@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Codex Efficiency Setup</title>
+
+
+
+    <style>
+      :root {
+        --bg: #f4f4f1;
+        --surface: #ffffff;
+        --surface-2: #ececea;
+        --ink: #17191d;
+        --ink-2: #4c5158;
+        --line: #d8d8d2;
+        --accent: #0d7a4a;
+        --accent-soft: #e2f2e9;
+        --amber: #9a6206;
+        --amber-soft: #f7ecd4;
+        --code-bg: #10151a;
+        --code-ink: #d7e0d8;
+        --code-dim: #7d8b80;
+        --radius: 10px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d0f11;
+          --surface: #15181c;
+          --surface-2: #1c2025;
+          --ink: #e9ebe7;
+          --ink-2: #a7adb2;
+          --line: #2a2f35;
+          --accent: #43c07f;
+          --accent-soft: #123324;
+          --amber: #e0a83e;
+          --amber-soft: #33270e;
+          --code-bg: #0a0e12;
+          --code-ink: #d7e0d8;
+          --code-dim: #71806f;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-size: 16.5px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 72px; }
+      code, pre, .mono { font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; }
+
+      /* ---------- lead ---------- */
+      header.lead { padding: 44px 0 8px; }
+      .status-line {
+        display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+        font-family: "IBM Plex Mono", monospace; font-size: 12.5px;
+      }
+      .chip {
+        border: 1px solid var(--line); border-radius: 999px;
+        padding: 4px 11px; color: var(--ink-2); background: var(--surface);
+      }
+      .chip b { color: var(--accent); font-weight: 600; }
+      h1 {
+        font-size: clamp(30px, 5.4vw, 44px); line-height: 1.08;
+        letter-spacing: -0.02em; margin: 0 0 14px; font-weight: 700;
+      }
+      .lede { font-size: 18px; color: var(--ink-2); max-width: 640px; margin: 0; }
+      .lede strong { color: var(--ink); }
+
+      /* ---------- sections ---------- */
+      section { margin-top: 52px; }
+      h2 {
+        font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px;
+        display: flex; align-items: baseline; gap: 10px;
+      }
+      h2 .num {
+        font-family: "IBM Plex Mono", monospace; font-size: 13px;
+        color: var(--accent); font-weight: 600;
+      }
+      .sub { color: var(--ink-2); margin: 0 0 20px; max-width: 660px; }
+
+      /* ---------- run steps ---------- */
+      .steps { display: grid; gap: 12px; }
+      .step {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 16px 18px;
+        display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start;
+      }
+      .step .n {
+        width: 30px; height: 30px; border-radius: 50%;
+        background: var(--accent-soft); color: var(--accent);
+        font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px;
+        display: flex; align-items: center; justify-content: center; margin-top: 2px;
+      }
+      .step > div { min-width: 0; }
+      .step h3 { margin: 0 0 4px; font-size: 16.5px; }
+      .step p { margin: 0; color: var(--ink-2); font-size: 15px; }
+      .cmd {
+        display: flex; align-items: center; gap: 10px; margin-top: 10px;
+        background: var(--code-bg); border-radius: 8px; padding: 10px 12px;
+      }
+      .cmd code { color: var(--code-ink); font-size: 13.5px; overflow-x: auto; white-space: nowrap; flex: 1; }
+      .cmd code::-webkit-scrollbar { display: none; }
+
+      /* ---------- buttons ---------- */
+      .btn {
+        appearance: none; border: 1px solid var(--line); cursor: pointer;
+        background: var(--surface); color: var(--ink);
+        font-family: "IBM Plex Sans", sans-serif; font-size: 13.5px; font-weight: 600;
+        border-radius: 8px; padding: 7px 13px; white-space: nowrap;
+        transition: border-color .15s, background .15s;
+      }
+      .btn:hover { border-color: var(--accent); }
+      .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      @media (prefers-color-scheme: dark) { .btn.primary { color: #08130c; } }
+      .btn.primary:hover { filter: brightness(1.08); }
+      .btn.small { padding: 5px 10px; font-size: 12.5px; }
+      .btn.on-dark { background: transparent; border-color: #39424a; color: #cfe3d4; }
+      .btn.on-dark:hover { border-color: var(--accent); }
+      .btn.copied { border-color: var(--accent); color: var(--accent); }
+
+      /* ---------- what it does ---------- */
+      .does { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .does .item {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 15px 17px;
+      }
+      .does .item h3 { margin: 0 0 5px; font-size: 15.5px; display: flex; gap: 8px; align-items: baseline; }
+      .does .item h3 .k { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent); }
+      .does .item p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .does .item code { font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+
+      /* ---------- mapping table ---------- */
+      .map { width: 100%; border-collapse: collapse; background: var(--surface);
+        border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+      .map th, .map td { text-align: left; padding: 11px 15px; font-size: 14.5px; vertical-align: top; }
+      .map thead th { background: var(--surface-2); font-size: 12.5px; letter-spacing: .04em;
+        text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+      .map tbody tr + tr td { border-top: 1px solid var(--line); }
+      .map td code { font-size: 13px; }
+      .map td:first-child { color: var(--ink-2); width: 34%; }
+      .map td:nth-child(2) { width: 33%; }
+
+      /* ---------- subagent cards ---------- */
+      .agents { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .agent {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 10px;
+      }
+      .agent .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .agent .name { font-family: "IBM Plex Mono", monospace; font-size: 19px; font-weight: 600; }
+      .agent .badge {
+        font-family: "IBM Plex Mono", monospace; font-size: 11.5px; font-weight: 600;
+        border-radius: 999px; padding: 3px 10px; background: var(--accent-soft); color: var(--accent);
+      }
+      .agent .badge.slow { background: var(--amber-soft); color: var(--amber); }
+      .agent p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .agent .specs { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--ink-2);
+        border-top: 1px dashed var(--line); padding-top: 10px; display: grid; gap: 3px; }
+      .agent .specs b { color: var(--ink); font-weight: 500; }
+
+      /* ---------- code panels ---------- */
+      .panel { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--code-bg); }
+      .panel .bar {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        padding: 10px 12px; border-bottom: 1px solid #232b33;
+      }
+      .panel .fname { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--code-ink);
+        font-weight: 600; margin-right: auto; word-break: break-all; }
+      .panel .fsize { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--code-dim); }
+      .panel pre {
+        margin: 0; padding: 16px; overflow: auto; max-height: 460px;
+        font-size: 12.8px; line-height: 1.55; color: var(--code-ink);
+      }
+      .panel pre code { white-space: pre; }
+      .panel.tall pre { max-height: 560px; }
+      .md-view { background: var(--surface); }
+      .md-view .bar { border-bottom-color: var(--line); }
+      .md-view .fname { color: var(--ink); }
+      .md-view .fsize { color: var(--ink-2); }
+      .md-view pre { color: var(--ink); font-size: 13px; }
+
+      /* ---------- callouts ---------- */
+      .callout {
+        border: 1px solid var(--line); border-radius: var(--radius);
+        background: var(--surface); padding: 16px 18px;
+      }
+      .callout.warn { border-color: var(--amber); background: var(--amber-soft); }
+      .callout h3 { margin: 0 0 6px; font-size: 15.5px; }
+      .callout p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .callout.warn p { color: var(--ink); }
+      .callout p + p { margin-top: 8px; }
+      .callout code { font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+      .callout .cmd code { background: transparent; padding: 0; border-radius: 0; color: var(--code-ink); }
+      .stack { display: grid; gap: 12px; }
+
+      ul.tight { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 15px; }
+      ul.tight li + li { margin-top: 6px; }
+      ul.tight code { font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+
+      footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 18px;
+        color: var(--ink-2); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+
+      @media (max-width: 640px) {
+        .does, .agents { grid-template-columns: 1fr; }
+        .step { grid-template-columns: 28px 1fr; padding: 14px; }
+        .btn { white-space: normal; overflow-wrap: anywhere; text-align: left; }
+        .cmd .btn { white-space: nowrap; overflow-wrap: normal; }
+        .map td:first-child { width: auto; }
+        .map th, .map td { padding: 9px 11px; font-size: 13.5px; }
+        body { font-size: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="lead">
+        <div class="status-line">
+          <span class="chip">sign in with <b>ChatGPT</b> or an API key</span>
+          <span class="chip">Windows · PowerShell</span>
+          <span class="chip">safe to re-run</span>
+        </div>
+        <h1>Codex Efficiency Setup</h1>
+        <p class="lede">
+          The Codex twin of the Claude setup. One PowerShell script checks what you have,
+          then asks before it installs tools or writes Codex settings and working rules.
+          Optional agent files are available but off by default.
+        </p>
+      </header>
+
+            <!-- ================= RUN IT ================= -->
+      <section id="run">
+        <h2><span class="num">01</span> Run it</h2>
+        <p class="sub">Download the script, read what it does, then run it. Every change is shown and asked for first. The only manual step is the sign-in, which is a browser login that no script does for you.</p>
+        <div class="callout warn">
+          <h3>Before you run it: what can change</h3>
+          <ul>
+            <li><b>Software (only if you approve):</b> Node.js LTS and Git through winget, if they are missing; the Codex CLI (<code>@openai/codex</code>) and ccusage through npm, if they are missing. Each is installed globally by its own package manager.</li>
+            <li><b>Codex files (only if you approve):</b> <code>config.toml</code> is created only when none exists. If one exists, it is never modified; the suggested settings go to <code>aeru-efficiency-snippet.toml</code>. <code>AGENTS.md</code> gets a marked rules block appended after a timestamped backup, and is not changed again once the block is present.</li>
+            <li><b>Optional agent files (off by default):</b> <code>agents/scout.toml</code> and <code>agents/reviewer.toml</code>, only if they do not already exist.</li>
+            <li><b>Nothing else:</b> no global instructions, system settings, or other config files are touched. Your Codex home is the <code>CODEX_HOME</code> folder if set, otherwise <code>%USERPROFILE%\.codex</code>.</li>
+          </ul>
+          <p>Prompts do not guarantee results, and Codex usage and cost depend on your OpenAI plan or API billing.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="n">1</div>
+            <div>
+              <h3>Download the pack</h3>
+              <p>Grab both files below. The script does the setup; the prompt finishes the job inside your first project.</p>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+                <button class="btn primary" data-download="ps1">Download setup-codex-efficiency.ps1</button>
+                <button class="btn" data-download="prompt">Download FIRST-RUN-SETUP-PROMPT-CODEX.md</button>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <div>
+              <h3>Run the script</h3>
+              <p>Open PowerShell in the folder holding the files. The execution-policy line applies to that one session only. Works in Windows PowerShell 5.1 and PowerShell 7. Answer <b>y</b> or <b>N</b> at each prompt; pressing Enter means No.</p>
+              <div class="cmd">
+                <code>Set-ExecutionPolicy -Scope Process Bypass</code>
+                <button class="btn small on-dark" data-copy-text="Set-ExecutionPolicy -Scope Process Bypass">Copy</button>
+              </div>
+              <div class="cmd">
+                <code>.\setup-codex-efficiency.ps1</code>
+                <button class="btn small on-dark" data-copy-text=".\setup-codex-efficiency.ps1">Copy</button>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <div>
+              <h3>Sign in, then paste the first-run prompt</h3>
+              <p>Run <code class="mono" style="font-size:13.5px;">codex</code> once and sign in with your ChatGPT account, or use an OpenAI API key. Then open Codex inside a project folder and paste the first-run prompt (section 06) as your first message. Check what it reports; it is a checklist, not a guarantee.</p>
+              <div class="cmd">
+                <code>codex</code>
+                <button class="btn small on-dark" data-copy-text="codex">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WHAT IT DOES ================= -->
+      <section id="does">
+        <h2><span class="num">02</span> What the script does</h2>
+        <p class="sub">The script first lists the current state and changes nothing. Then it asks, step by step, before anything is installed or written.</p>
+        <div class="does">
+          <div class="item">
+            <h3><span class="k">A</span> Install tools (asks first)</h3>
+            <p>Installs any missing Node.js LTS and Git through winget, then the Codex CLI and ccusage through npm. If winget is not present, the script says so and installs nothing. Answering No skips this step entirely.</p>
+          </div>
+          <div class="item">
+            <h3><span class="k">B</span> Settings and rules (asks first)</h3>
+            <p>Creates <code>config.toml</code> only if none exists. Creates or extends <code>AGENTS.md</code> with the working-rules block, backing up the existing file first. Re-running the script does not add the block twice.</p>
+          </div>
+          <div class="item">
+            <h3><span class="k">C</span> Optional subagents (asks first, off by default)</h3>
+            <p>Writes <code>scout.toml</code> and <code>reviewer.toml</code> into <code>agents/</code> under your Codex home, only if those files are missing. Check the Codex subagent documentation for your version to confirm they load; the script does not depend on them.</p>
+          </div>
+          <div class="item">
+            <h3><span class="k">+</span> Result</h3>
+            <p>Each step reports <b>ok</b>, <b>warn</b> or <b>fail</b>. Approved steps that succeed stay done even if a later step fails.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CONFIG SAFETY ================= -->
+      <section id="safety">
+        <h2><span class="num">—</span> The config safety rule</h2>
+        <div class="callout warn">
+          <h3>Already have a <span class="mono">config.toml</span>? The script does not modify it.</h3>
+          <p>The suggested settings are written to <code>aeru-efficiency-snippet.toml</code> in the same folder. Merge them yourself if you want them. The script never writes a model name, so no model is pinned unless you add one.</p>
+        </div>
+      </section>
+
+      <!-- ================= SUBAGENTS ================= -->
+      <section id="agents">
+        <h2><span class="num">03</span> Optional subagents</h2>
+        <p class="sub">Off by default. Skip this section unless you want the two extra agent files and have checked that your Codex version loads them.</p>
+        <div class="agents">
+          <div class="agent">
+            <div class="head">
+              <span class="name">scout</span>
+              <span class="badge">optional</span>
+            </div>
+            <p>Intended for bounded search and exploration. Each file has a <code>name</code>, a <code>description</code>, and <code>developer_instructions</code>, as Codex's custom-agent format requires. No model is set, so it uses your default model.</p>
+            <div class="specs">
+              <span>file&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;CODEX_HOME&gt;/agents/scout.toml</b></span>
+            </div>
+          </div>
+          <div class="agent">
+            <div class="head">
+              <span class="name">reviewer</span>
+              <span class="badge slow">optional</span>
+            </div>
+            <p>Intended for second opinions on a diff or design. Same format as scout, with no model set.</p>
+            <div class="specs">
+              <span>file&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;CODEX_HOME&gt;/agents/reviewer.toml</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:14px;">
+          <h3>Verify before you rely on them</h3>
+          <p>Run Codex and ask it to list its available agents. If the files do not appear, they are not loaded in your version, and you can delete them without affecting anything else.</p>
+        </div>
+      </section>
+
+      <!-- ================= CLAUDE VS CODEX ================= -->
+      <section id="map">
+        <h2><span class="num">04</span> Same playbook, Codex names</h2>
+        <p class="sub">Everything from the Claude setup has a Codex equivalent — the concepts transfer one-to-one, only the filenames change.</p>
+        <table class="map">
+          <thead>
+            <tr><th>Job</th><th>Claude</th><th>Codex</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Global config</td>
+              <td><code>settings.json</code></td>
+              <td><code>~/.codex/config.toml</code></td>
+            </tr>
+            <tr>
+              <td>Rules file</td>
+              <td><code>CLAUDE.md</code></td>
+              <td><code>AGENTS.md</code> — global in <code>~/.codex/</code>, project copy in the repo. Codex can even be configured to read CLAUDE.md as a fallback filename.</td>
+            </tr>
+            <tr>
+              <td>Effort control</td>
+              <td>effort setting</td>
+              <td><code>model_reasoning_effort</code> in config; bump it live mid-session with <code>Alt+</code> / <code>Alt-</code></td>
+            </tr>
+            <tr>
+              <td>Subagent routing</td>
+              <td>agent definitions</td>
+              <td>Optional <code>.toml</code> per subagent in <code>~/.codex/agents/</code>, no model pinned</td>
+            </tr>
+            <tr>
+              <td>Prompt caching</td>
+              <td>cache breakpoints to manage</td>
+              <td>Automatic — nothing to configure</td>
+            </tr>
+            <tr>
+              <td>Context exclusion</td>
+              <td>read-deny list</td>
+              <td>Sandbox modes per agent (<code>read-only</code> / <code>workspace-write</code>)</td>
+            </tr>
+            <tr>
+              <td>The meter</td>
+              <td><code>ccusage daily</code></td>
+              <td><code>ccusage codex daily</code> — plus built-in <code>/status</code> and <code>/usage</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ================= THE SCRIPT ================= -->
+      <section id="script">
+        <h2><span class="num">05</span> The script</h2>
+        <p class="sub">The whole thing, readable before you run it — that's the point of shipping it as a file instead of a one-liner. Download it or copy it straight into a <code class="mono" style="font-size:13px;">.ps1</code>.</p>
+        <div class="panel tall">
+          <div class="bar">
+            <span class="fname">setup-codex-efficiency.ps1</span>
+            <span class="fsize" id="ps1-size"></span>
+            <button class="btn small on-dark" data-copy-target="ps1-body">Copy</button>
+            <button class="btn small on-dark" data-download="ps1">Download .ps1</button>
+          </div>
+          <pre><code id="ps1-body">&lt;#
+================================================================================
+  AERU - CODEX EFFICIENCY SETUP (Windows, PowerShell 5.1 or 7)
+
+  This script is OPTIONAL. It makes no changes until you approve each step.
+
+  STEP A - Install tools (only if you approve):
+    - Node.js LTS and Git, through winget, if they are missing
+    - Codex CLI (npm package @openai/codex) and ccusage (npm package ccusage)
+
+  STEP B - Change Codex files (only if you approve):
+    - config.toml: written only when none exists. If you already have one,
+      the suggested settings go to aeru-efficiency-snippet.toml instead, and
+      your config.toml is not modified.
+    - AGENTS.md: a marked block of working rules is appended. If the block is
+      already present it is not added again. Existing files are backed up first.
+
+  STEP C - Optional subagents (off by default):
+    - agents\scout.toml and agents\reviewer.toml, only if they do not exist.
+      Read the Codex subagent documentation to confirm they load in your version.
+
+  Your Codex home is the CODEX_HOME folder if that variable is set, otherwise
+  %USERPROFILE%\.codex.
+================================================================================
+#&gt;
+
+$ErrorActionPreference = 'Continue'
+$problems = 0
+
+function Ok($text)   { Write-Host "  [ok]   $text" -ForegroundColor Green }
+function Warn($text) { Write-Host "  [warn] $text" -ForegroundColor Yellow }
+function Fail($text) { $script:problems++; Write-Host "  [fail] $text" -ForegroundColor Red }
+function Step($text) { Write-Host ""; Write-Host "== $text" -ForegroundColor Cyan }
+function Have($name) { return [bool](Get-Command $name -ErrorAction SilentlyContinue) }
+function Refresh-Path {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
+function Ask-YesNo($question) {
+    $answer = Read-Host "$question [y/N]"
+    return ($answer -match '^(y|yes)$')
+}
+function Write-Utf8NoBom($path, $text) {
+    [IO.File]::WriteAllText($path, $text, (New-Object System.Text.UTF8Encoding($false)))
+}
+function Append-Utf8NoBom($path, $text) {
+    [IO.File]::AppendAllText($path, $text, (New-Object System.Text.UTF8Encoding($false)))
+}
+function Backup-File($path) {
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+    $backup = "$path.bak-$stamp"
+    Copy-Item -LiteralPath $path -Destination $backup -Force
+    return $backup
+}
+
+# ---- Where Codex lives on this computer -----------------------------------
+if ($env:CODEX_HOME -and $env:CODEX_HOME.Trim() -ne '') { $codexHome = $env:CODEX_HOME.Trim() } else { $codexHome = Join-Path $HOME '.codex' }
+$configPath   = Join-Path $codexHome 'config.toml'
+$snippetPath  = Join-Path $codexHome 'aeru-efficiency-snippet.toml'
+$agentsMdPath = Join-Path $codexHome 'AGENTS.md'
+$agentsDir    = Join-Path $codexHome 'agents'
+$marker = '&lt;!-- AERU-EFFICIENCY-RULES v1 --&gt;'
+
+Write-Host ""
+Write-Host "Codex efficiency setup" -ForegroundColor Cyan
+Write-Host "Codex home: $codexHome"
+Write-Host ""
+Write-Host "Current state (nothing has been changed yet):"
+Write-Host ("  node        : " + $(if (Have 'node') { 'installed' } else { 'missing' }))
+Write-Host ("  git         : " + $(if (Have 'git') { 'installed' } else { 'missing' }))
+Write-Host ("  npm         : " + $(if (Have 'npm') { 'installed' } else { 'missing' }))
+Write-Host ("  codex       : " + $(if (Have 'codex') { 'installed' } else { 'missing' }))
+Write-Host ("  ccusage     : " + $(if (Have 'ccusage') { 'installed' } else { 'missing' }))
+if (Test-Path -LiteralPath $configPath) { Write-Host "  config.toml : exists - will NOT be modified" } else { Write-Host "  config.toml : missing - will be created" }
+if (Test-Path -LiteralPath $agentsMdPath) {
+    $existingAgents = Get-Content -LiteralPath $agentsMdPath -Raw
+    if ($existingAgents -and $existingAgents.Contains($marker)) { Write-Host "  AGENTS.md   : rules block already present - skipped" }
+    else { Write-Host "  AGENTS.md   : exists - a rules block will be appended after a backup" }
+} else { Write-Host "  AGENTS.md   : missing - will be created" }
+Write-Host ""
+
+# ---- Step A: tools ---------------------------------------------------------
+Step 'Step A - Install tools (optional)'
+if (Ask-YesNo 'Install any missing tools now (winget and npm will run)?') {
+    if (-not (Have 'winget')) {
+        Warn "winget was not found. Install 'App Installer' from the Microsoft Store, then run this script again."
+    } else {
+        if (-not (Have 'node')) {
+            Write-Host '  Installing Node.js LTS with winget...'
+            &amp; winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements
+            if ($LASTEXITCODE -eq 0) { Ok 'Node.js installed' } else { Fail "winget could not install Node.js (exit $LASTEXITCODE)" }
+        }
+        if (-not (Have 'git')) {
+            Write-Host '  Installing Git with winget...'
+            &amp; winget install --id Git.Git -e --accept-source-agreements --accept-package-agreements
+            if ($LASTEXITCODE -eq 0) { Ok 'Git installed' } else { Fail "winget could not install Git (exit $LASTEXITCODE)" }
+        }
+    }
+    Refresh-Path
+    if (-not (Have 'npm')) {
+        Fail 'npm is not available. Close and reopen PowerShell, then run this script again.'
+    } else {
+        if (-not (Have 'codex')) {
+            Write-Host '  Installing the Codex CLI (npm package @openai/codex)...'
+            &amp; npm install -g @openai/codex
+            if ($LASTEXITCODE -eq 0) { Ok 'Codex CLI installed' } else { Fail "npm could not install @openai/codex (exit $LASTEXITCODE)" }
+        }
+        if (-not (Have 'ccusage')) {
+            Write-Host '  Installing ccusage (npm package ccusage)...'
+            &amp; npm install -g ccusage
+            if ($LASTEXITCODE -eq 0) { Ok 'ccusage installed' } else { Fail "npm could not install ccusage (exit $LASTEXITCODE)" }
+        }
+    }
+    Refresh-Path
+} else {
+    Ok 'Skipped. No tools were installed.'
+}
+
+# ---- Step B: Codex files ---------------------------------------------------
+Step 'Step B - Codex settings and rules (optional)'
+if (Ask-YesNo "Write the Codex settings and rules described above to $codexHome ?") {
+    try {
+        if (-not (Test-Path -LiteralPath $codexHome)) { New-Item -ItemType Directory -Path $codexHome | Out-Null }
+    } catch { Fail "Could not create $codexHome : $($_.Exception.Message)" }
+
+    $tunedConfig = @'
+# --- AERU efficiency defaults for Codex -------------------------------------
+# No model is pinned. Choose a model in Codex or in your own config.
+model_reasoning_effort = "medium"
+web_search = "cached"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[features]
+multi_agent = true
+# --- /AERU efficiency defaults ---------------------------------------------
+'@
+
+    try {
+        if (Test-Path -LiteralPath $configPath) {
+            if (Test-Path -LiteralPath $snippetPath) { $b = Backup-File $snippetPath; Ok "Backed up the old snippet to $(Split-Path $b -Leaf)" }
+            Write-Utf8NoBom $snippetPath $tunedConfig
+            Ok 'config.toml already exists and was NOT modified.'
+            Ok 'Suggested settings saved to aeru-efficiency-snippet.toml. Merge them yourself if you want them.'
+        } else {
+            Write-Utf8NoBom $configPath $tunedConfig
+            Ok 'config.toml created with the efficiency defaults.'
+        }
+    } catch { Fail "config.toml step failed: $($_.Exception.Message). No other file in this step was changed." }
+
+    $rules = @'
+
+&lt;!-- AERU-EFFICIENCY-RULES v1 --&gt;
+## Working rules (token discipline and accuracy)
+
+- Work on the files and symptoms I name. Do not explore the whole repository unless asked.
+- Prefer targeted edits. Search before reading large files end to end.
+- Never claim something was installed, changed, tested, or published unless it was verified.
+- Ask before deleting files, changing configuration, or installing software.
+- Keep each task in its own session; start fresh when the task changes.
+&lt;!-- /AERU-EFFICIENCY-RULES v1 --&gt;
+'@
+    try {
+        if (Test-Path -LiteralPath $agentsMdPath) {
+            $current = Get-Content -LiteralPath $agentsMdPath -Raw
+            if ($current -and $current.Contains($marker)) {
+                Ok 'AGENTS.md already has the rules block. It was not added again.'
+            } else {
+                $b = Backup-File $agentsMdPath
+                Ok "Backed up AGENTS.md to $(Split-Path $b -Leaf)"
+                if ($current -and -not $current.EndsWith("`n")) { Append-Utf8NoBom $agentsMdPath "`r`n" }
+                Append-Utf8NoBom $agentsMdPath $rules
+                Ok 'Rules block appended to AGENTS.md.'
+            }
+        } else {
+            Write-Utf8NoBom $agentsMdPath ($rules.TrimStart("`r", "`n"))
+            Ok 'AGENTS.md created with the rules block.'
+        }
+    } catch { Fail "AGENTS.md step failed: $($_.Exception.Message). Any backup made is next to the file." }
+} else {
+    Ok 'Skipped. No Codex files were changed.'
+}
+
+# ---- Step C: optional subagents --------------------------------------------
+Step 'Step C - Optional subagents (off by default)'
+if (Ask-YesNo 'Add the optional scout and reviewer agent files (only files that do not exist yet)?') {
+    try {
+        if (-not (Test-Path -LiteralPath $agentsDir)) { New-Item -ItemType Directory -Path $agentsDir | Out-Null }
+        $scout = @'
+name = "scout"
+description = "Read-only search, exploration and extraction. Use for finding files and tracing where things are defined or used."
+developer_instructions = """
+You are a scout. You do read-only exploration and report back; you never edit anything.
+Answer exactly what was asked, with file paths and line references.
+Return facts and pointers, not file dumps. If you did not find it, say so.
+"""
+'@
+        $reviewer = @'
+name = "reviewer"
+description = "Second opinion on a diff or design. Use when correctness matters more than speed."
+developer_instructions = """
+You are a reviewer. You analyze and critique; you never edit anything.
+Read the actual code before judging it and cite files and lines.
+List the most serious risks first. Label verified problems separately from suspicions.
+"""
+'@
+        foreach ($pair in @(@('scout.toml', $scout), @('reviewer.toml', $reviewer))) {
+            $path = Join-Path $agentsDir $pair[0]
+            if (Test-Path -LiteralPath $path) { Ok "$($pair[0]) already exists - left untouched" }
+            else { Write-Utf8NoBom $path $pair[1]; Ok "$($pair[0]) created" }
+        }
+    } catch { Fail "Subagent step failed: $($_.Exception.Message)" }
+} else {
+    Ok 'Skipped. No agent files were written.'
+}
+
+# ---- Result ----------------------------------------------------------------
+Write-Host ""
+if ($problems -eq 0) {
+    Write-Host 'Finished. Nothing was changed except the steps you approved above.' -ForegroundColor Green
+} else {
+    Write-Host "Finished with $problems problem(s). Read the [fail] lines above; approved steps that succeeded are complete." -ForegroundColor Yellow
+}
+Write-Host 'Next: run codex once and sign in with your ChatGPT account, or use an OpenAI API key.'
+</code></pre>
+        </div>
+      </section>
+
+      <!-- ================= FIRST-RUN PROMPT ================= -->
+      <section id="prompt">
+        <h2><span class="num">06</span> The first-run prompt</h2>
+        <p class="sub">After the script and sign-in, open Codex inside your project and paste everything in this file as your first message. Codex finishes the setup and verifies the script's work — run it once per project. Step 2 checks the optional subagents only if you installed them; step 3 reads your global rules back to you.</p>
+        <div class="panel tall md-view">
+          <div class="bar">
+            <span class="fname">FIRST-RUN-SETUP-PROMPT-CODEX.md</span>
+            <span class="fsize" id="prompt-size"></span>
+            <button class="btn small" data-copy-target="prompt-body">Copy</button>
+            <button class="btn small" data-download="prompt">Download .md</button>
+          </div>
+          <pre><code id="prompt-body"># FIRST-RUN SETUP PROMPT — CODEX EDITION
+
+**How to use:** After running `setup-codex-efficiency.ps1` and signing in,
+open Codex *inside your project folder* and paste everything between the
+lines below as your first message. Codex finishes the setup and verifies the
+script's work. Run it once per project.
+
+---
+
+You are my setup agent. Configure this project for token-efficient agentic
+coding, then verify the global setup. Work through this list in order and
+report each item as done, skipped, or failed (with the actual error):
+
+1. **Merge and validate the global config.** Look for
+   `~/.codex/aeru-efficiency-snippet.toml`. If it exists, merge its settings
+   into `~/.codex/config.toml`: on any conflict, keep my existing value
+   except for `web_search = "cached"` and `multi_agent = true`, which should
+   win. Validate the result is legal TOML. If the snippet doesn't exist, my
+   config was written directly — validate it the same way. Then confirm the
+   effective values of: `model_reasoning_effort`, `web_search`,
+   `sandbox_mode`, `approval_policy`, and `features.multi_agent`.
+
+2. **Check the optional subagents.** Only if `~/.codex/agents/scout.toml`
+   or `~/.codex/agents/reviewer.toml` exist: confirm each has `name`,
+   `description`, and `developer_instructions`, and that it parses as TOML.
+   Do not change any model names. If the files are missing, say "skipped" and
+   continue. Do not claim a subagent works unless you actually ran it.
+
+3. **Confirm the global rules loaded.** Read `~/.codex/AGENTS.md` and confirm
+   the block marked `AERU-EFFICIENCY-RULES` is present. Summarize its rules
+   back to me in 3 lines so I know they're active.
+
+4. **Write this project's AGENTS.md.** Scan the repo and write a project
+   `AGENTS.md` of AT MOST 100 lines containing only: what this app is (2-3
+   lines), the stack, how to build/run/test it (exact commands), the folder
+   map (one line per major folder), and any project-specific gotchas you can
+   verify from the code. No generic advice — if you can't verify it from
+   this repo, leave it out. Show me the file when done.
+
+5. **Measure the baseline.** Run `ccusage codex daily` (or
+   `npx ccusage@latest codex daily`) and report: total tokens, estimated
+   cost, and cached-token share so far. Note: OpenAI caching is automatic —
+   if the cached share is low, tell me the most likely reason from how the
+   sessions look.
+
+6. **Final report.** One short list: what you changed, what you verified as
+   already correct, and anything that needs my decision. Nothing else.
+
+Rules for you, starting now and for every future session in this project:
+- When I give you a photo or screenshot of a UI, build THAT UI exactly — do
+  not redesign it. This is the rule you have broken before; don't break it
+  again.
+- If the scout subagent is installed and loads, route search and exploration
+  to it. Otherwise do that work yourself. Warn me before doing anything that
+  will push the context toward your model's limit.
+
+---</code></pre>
+        </div>
+      </section>
+
+      <!-- ================= HONEST NOTES ================= -->
+      <section id="notes">
+        <h2><span class="num">07</span> Honest notes</h2>
+        <div class="stack">
+          <div class="callout">
+            <h3>What this setup does not promise</h3>
+            <p>It does not guarantee lower cost, fewer tokens, or better results. It writes settings and rules and gives you a usage meter. Whether any of it helps depends on your work, your plan or API billing, and the models available to you.</p>
+          </div>
+          <div class="callout">
+            <h3>After setup: the weekly reality check</h3>
+            <p>One command tells you what Codex actually cost and how much of it was cache:</p>
+            <div class="cmd" style="margin-top:10px;">
+              <code>ccusage codex daily</code>
+              <button class="btn small on-dark" data-copy-text="ccusage codex daily">Copy</button>
+            </div>
+            <p style="margin-top:10px;">Once you're running both agents, plain <code>ccusage daily</code> shows Claude and Codex combined — one number for the whole operation.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Codex Efficiency Setup — twin of the Claude Token Efficiency setup, same research, Codex mechanics.</span>
+        <span class="mono">Oct 2026</span>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        function flash(btn, label) {
+          var old = btn.textContent;
+          btn.textContent = label;
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.textContent = old;
+            btn.classList.remove("copied");
+          }, 1600);
+        }
+        function copyText(text, btn) {
+          function done() { if (btn) flash(btn, "Copied ✓"); }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+          } else { fallback(); }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); done(); } catch (e) {}
+            document.body.removeChild(ta);
+          }
+        }
+        function bodyText(id) {
+          var el = document.getElementById(id);
+          return el ? el.textContent.replace(/^\n+/, "") : "";
+        }
+        var FILES = {
+          ps1: { id: "ps1-body", name: "setup-codex-efficiency.ps1", sizeId: "ps1-size" },
+          prompt: { id: "prompt-body", name: "FIRST-RUN-SETUP-PROMPT-CODEX.md", sizeId: "prompt-size" }
+        };
+        function download(key) {
+          var f = FILES[key];
+          var text = bodyText(f.id);
+          var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = f.name;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        }
+        document.querySelectorAll("[data-copy-text]").forEach(function (btn) {
+          btn.addEventListener("click", function () { copyText(btn.getAttribute("data-copy-text"), btn); });
+        });
+        document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
+          btn.addEventListener("click", function () { copyText(bodyText(btn.getAttribute("data-copy-target")), btn); });
+        });
+        document.querySelectorAll("[data-download]").forEach(function (btn) {
+          btn.addEventListener("click", function () { download(btn.getAttribute("data-download")); });
+        });
+        Object.keys(FILES).forEach(function (key) {
+          var f = FILES[key];
+          var sizeEl = document.getElementById(f.sizeId);
+          if (sizeEl) {
+            var lines = bodyText(f.id).split("\n").length;
+            sizeEl.textContent = lines + " lines";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

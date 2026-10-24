@@ -1,0 +1,70 @@
+.instruction-warning>div { min-width: 0; }
+.instruction-button.acknowledge {
+  margin-top: 8px;
+  border-color: #8a4937;
+  background: linear-gradient(180deg, #542b22, #2b1916);
+  color: #ffd4c5;
+  font-size: 11px;
+}
+.instruction-button.acknowledge:hover:not(:disabled) { border-color: #dc8668; }
+.instruction-acknowledgment {
+  display: grid;
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid #774436;
+  background: linear-gradient(115deg, #241916, #121414);
+  box-shadow: inset 3px 0 #ce7050;
+}
+.instruction-acknowledgment > div:first-child { display: grid; gap: 4px; }
+.instruction-acknowledgment > div:first-child b { color: #f3c3ad; font-size: 13px; }
+.instruction-acknowledgment > div:first-child span { color: #c0b7ae; font-size: 11px; line-height: 1.5; }
+.instruction-ack-controls { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.instruction-button.acknowledge-confirm {
+  border-color: #276f54;
+  background: linear-gradient(180deg, #205a43, #153327);
+  color: #c9f3d7;
+}
+.instruction-button.acknowledge-confirm:disabled { opacity: .45; }
+.instruction-acknowledged, .instruction-service-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 9px 11px;
+  border: 1px solid #285842;
+  background: #101a15;
+  color: #c6e6d1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.instruction-acknowledged svg, .instruction-service-note svg { flex: none; color: #65d6a0; margin-top: 1px; }
+.instruction-acknowledged span, .instruction-service-note span { flex: 1; }
+.instruction-acknowledged button {
+  border: 0;
+  background: transparent;
+  color: #9ed9c2;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 11px;
+}
+.instruction-service-note { border-color: #344a4b; background: #0d1516; color: #b8c7c5; }
+.instruction-service-note svg { color: #70c9c5; }
+.instruction-final-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 8px 9px;
+  border-left: 2px solid #ce7050;
+  background: #1c1715;
+  color: #e2c4b5;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.instruction-final-warning svg { flex: none; color: #ef9070; margin-top: 2px; }
+@media (max-width: 760px) {
+  .instruction-installer { padding: 12px; }
+  .instruction-agent-grid { grid-template-columns: 1fr; }
+  .instruction-metadata span { align-items: flex-start; flex-direction: column; gap: 2px; }
+  .instruction-metadata b, .instruction-metadata code { text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+  .instruction-acknowledged { flex-wrap: wrap; }
+  .instruction-acknowledged button { margin-left: auto; }
+}
