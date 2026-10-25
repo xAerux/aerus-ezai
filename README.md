@@ -130,6 +130,22 @@ Feedback and testing are appreciated as the project continues to improve.
 
 ---
 
+## Licence & Third-Party Branding
+
+AERUS AI EZ is an independent software project developed by Aeru Creations.
+
+All third-party software names, product logos, icons, trademarks, and associated branding remain the property of their respective owners.
+
+AERUS AI EZ is not affiliated with, sponsored by, officially partnered with, or endorsed by OpenAI, Anthropic, Google, xAI, Cursor, Ollama, LM Studio, or other third-party software providers unless explicitly stated otherwise.
+
+Links to third-party AI software are intended to direct users to the respective providers' official websites or authorized distribution sources.
+
+Aeru Creations does not claim ownership of third-party applications, trademarks, or branding.
+
+The project's MIT License applies to the material covered by that license. Third-party software, trademarks, logos, and other assets remain subject to their applicable terms and permissions.
+
+This disclaimer does not itself grant permission to redistribute third-party assets.
+
 ## ❤️ Built by Aeru Creations
 
 I'm an independent creator who enjoys building software, experimenting with AI, solving problems, and turning ideas into working projects.

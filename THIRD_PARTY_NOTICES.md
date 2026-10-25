@@ -103,3 +103,35 @@ The following table records package versions and license identifiers from the co
 ## Installer toolchain
 
 The local beta installer is built with NSIS 3.13 and the NSIS LZMA compressor. The installer package contains `NSIS-COPYING.txt` copied from the compiler distribution; NSIS 3.13's license identifies the included LZMA module as Common Public License 1.0, with the other NSIS materials primarily under zlib/libpng and bzip2 terms. The portable archive was retrieved from the Tauri binary-releases mirror only after SourceForge delivery routes repeatedly returned HTML, and its bytes matched SourceForge's published SHA-256 exactly (`ba63dffc4410ee89193e1cb5a41989991bd77c61068da17e3156d136b7b0b3d8`). This checksum match establishes byte identity with the SourceForge release file; it does not make the mirror an official NSIS source. The NSIS compiler itself is not included as a separate installed application.
+
+## Third-Party Branding & Disclaimer
+AERUS AI EZ is an independent software project developed by Aeru Creations.
+
+All third-party software names, product logos, icons, trademarks, and associated branding remain the property of their respective owners.
+
+AERUS AI EZ is not affiliated with, sponsored by, officially partnered with, or endorsed by OpenAI, Anthropic, Google, xAI, Cursor, Ollama, LM Studio, or other third-party software providers unless explicitly stated otherwise.
+
+Links to third-party AI software are intended to direct users to the respective providers' official websites or authorized distribution sources.
+
+Aeru Creations does not claim ownership of third-party applications, trademarks, or branding.
+
+The project's MIT License applies to the material covered by that license. Third-party software, trademarks, logos, and other assets remain subject to their applicable terms and permissions.
+
+This disclaimer does not itself grant permission to redistribute third-party assets.
+### Unresolved logo and icon permissions
+
+The following third-party logos and icons are shipped in `public/agent-logos/` and remain under the owner's review. No redistribution permission from the rights holder is documented in this repository. They are not covered by the MIT License. Keeping them does not establish that permission exists.
+
+| File | Provider named in the file | Rights status |
+|---|---|---|
+| `public/agent-logos/claude-code.png` | Anthropic | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/codex.ico` | OpenAI | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/gemini.png` | Google | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/grok.ico` | xAI | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/cursor.ico` | Cursor (Anysphere, Inc.) | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/ollama.ico` | Ollama | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/lm-studio.ico` | LM Studio | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/opencode.svg` | OpenCode | Unresolved. Redistribution permission not documented. |
+| `public/agent-logos/starnet.ico` | Not identified in the asset audit | Unresolved. Owner to identify the rights holder. |
+
+Project artwork (`ez-ai.ico`, `public/ez-ai.ico`, `public/ez-ai-icon.svg`, `public/aerus-ai-usage-hud.ico`) is created for this project. The MIT License covers it as part of the project.

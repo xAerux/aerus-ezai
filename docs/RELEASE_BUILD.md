@@ -134,15 +134,15 @@ Run on a disposable Windows 11 VM or a new standard user profile. Record each re
 ## 6. Decisions
 
 **Recorded by the owner (2026-10-23):**
-- **Licence:** MIT for EZ AI's own code (`LICENSE`, present in the GitHub repository). The earlier proprietary EULA draft ([docs/EULA-DRAFT.md](docs/EULA-DRAFT.md)) is historical and unapproved. Owner decision: confirm MIT as the final licence before packaging.
+- **Licence:** MIT for EZ AI's own code (`LICENSE`, present in the GitHub repository). The earlier proprietary EULA draft ([docs/EULA-DRAFT.md](EULA-DRAFT.md)) is historical and unapproved. Confirmed by the owner as the final licence.
 - **Brand:** Aeru Creations. No verified publisher identity and no registered legal business name is claimed.
 - **Signing:** none. Beta packages are unsigned; see the disclosure in section 7. Signing support stays available for future releases.
 - **Packaging:** not authorized. No Production package, installer, install or publication.
-- **Third-party notices:** checklist at [docs/THIRD_PARTY_NOTICE_CHECKLIST.md](docs/THIRD_PARTY_NOTICE_CHECKLIST.md).
+- **Third-party notices:** checklist at [docs/THIRD_PARTY_NOTICE_CHECKLIST.md](THIRD_PARTY_NOTICE_CHECKLIST.md).
 
 **Still open (for the owner):**
 
-1. **Licence.** The repo has an MIT `LICENSE`. Owner decision: confirm it, or choose one of the other options below for the compiled binary:
+1. **Licence.** Resolved: the owner confirmed the MIT `LICENSE`. The options below are kept for reference only:
    - *Proprietary, all rights reserved, with an end-user licence agreement.* Matches binary-only distribution. Needs written EULA text covering use, warranty disclaimer, liability limits and third-party notices.
    - *Source-available* (for example a non-commercial licence). Lets people read the source but limits commercial use.
    - *Permissive open source* (MIT or Apache-2.0). Allows reuse, requires notices in the binary distribution. Apache-2.0 includes an explicit patent grant. Only choose this if you want the source public.
@@ -177,7 +177,7 @@ Verify the SmartScreen and User Account Control wording against the actual behav
 - The older `RELEASE_CANDIDATE_*` documents and `RELEASE_NOTES_1.0.0-beta.1.md` describe beta.1 and must be updated for any release.
 - Historical Git commits still contain the owner's machine path; the current tree does not.
 - The two deleted legacy root binaries are uncommitted owner changes; leave them to the owner.
-- The MIT `LICENSE` file exists. The owner should confirm it before packaging.
+- The MIT `LICENSE` file exists and the owner has confirmed it.
 
 ## 9. Manifest and checksums
 
