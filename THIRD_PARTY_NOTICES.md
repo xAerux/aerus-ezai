@@ -18,11 +18,11 @@ The WPF host targets .NET Framework and uses Windows-provided WPF/.NET assemblie
 
 ## Marks and logos
 
-The EZ AI shield is project artwork. The UI also contains names and icons associated with third-party AI products. Brand names may be used for compatibility identification, but permission and attribution for redistribution of each product logo/icon have not yet been documented. Resolve that rights review before a public release.
+The EZ AI shield is project artwork. The UI also contains names and icons associated with third-party AI products. Brand names may be used for compatibility identification, but permission and attribution for redistribution of each product logo/icon have not yet been documented. The MIT License does not grant rights to these names, logos or artwork. Resolve that rights review before a public release.
 
 ## Product license
 
-No project-level `LICENSE` was found in the tracked repository. EZ AI's source and binary distribution license must be chosen by the owner before publishing or redistributing the application.
+EZ AI's own source code is licensed under the MIT License in [`LICENSE`](LICENSE) (Copyright (c) 2026 xAerux). That license covers EZ AI's own code only. It does not cover the third-party components listed in this file, which remain under their own licences, or the third-party names, logos, trademarks and artwork described above. The owner must confirm MIT as the final distribution licence. The EULA draft in `docs/EULA-DRAFT.md` is unapproved and not in effect.
 
 ## Locked package inventory
 

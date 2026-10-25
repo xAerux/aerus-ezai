@@ -1,5 +1,7 @@
 # EZ AI EULA: Decision Sheet
 
+> **Historical.** The repository is MIT-licensed (`LICENSE`). The open items below apply only if the owner later chooses a proprietary EULA, and they do not affect the MIT license.
+
 Purpose: list only the legal information that is still unresolved, with a recommended default for each. **No default has been approved.** Mark each row with your choice. Nothing in the EULA draft is final until you approve it in writing.
 
 Status key: **OPEN** = you must decide or supply information · **DEFAULT** = a recommended option you can accept, change or reject.

@@ -1,5 +1,7 @@
 # EZ AI End-User License Agreement
 
+> **HISTORICAL, UNAPPROVED, NONBINDING DRAFT.** This document does not apply to any release of EZ AI. EZ AI's own code is licensed under the MIT License in `LICENSE`, and nothing in this draft limits or revokes the permissions that license grants. It is kept only as a record of an earlier proposal.
+
 > **DRAFT — NOT APPROVED. Do not distribute.**
 > Items in **[CAPITALS IN BRACKETS]** are pending owner decisions or confirmation. See [EULA-DECISION-SHEET.md](EULA-DECISION-SHEET.md). This draft has not been reviewed by a lawyer and is not legal advice.
 

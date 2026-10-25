@@ -150,6 +150,6 @@ And this is only the beginning.
 
 **© 2026 Aeru Creations.**
 
-Third-party software and services remain the property of their respective owners. See the project's third-party notices for applicable acknowledgments and licensing information.
+EZ AI's own code is licensed under the [MIT License](LICENSE). Third-party software and services remain the property of their respective owners and keep their own licence terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for acknowledgments, licensing information and asset notes.
 
 

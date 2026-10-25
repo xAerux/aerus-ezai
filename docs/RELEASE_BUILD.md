@@ -1,6 +1,6 @@
 # Windows Release Build, Installer and Acceptance
 
-Status: **development blockers resolved for source; packaging is not yet approved.** No Production package, installer or publication has been made under this procedure. Owner decisions on licence, publisher identity and signing are still open (see "Owner decisions"). This document is for maintainers.
+Status: **development blockers resolved for source; packaging is not yet approved.** No Production package, installer or publication has been made under this procedure. The repository licence is MIT (see `LICENSE`). Owner decisions on publisher identity, the EULA and signing are still open (see "Owner decisions"). This document is for maintainers.
 
 ## 1. Version and identity
 
@@ -60,7 +60,7 @@ Installer facts (from `installer\EzAiSetup.nsi`):
 - Apps & Features entry: DisplayName, DisplayVersion, Publisher "Aeru Creations" (self-declared, not verified), InstallLocation.
 - Uninstall removes only manifest-listed files and shortcuts it owns; it preserves the user profile and any extra files.
 - The installer does **not** install or change AI applications, models, paid services or credentials.
-- The installer does **not** yet show the EULA. Before the first approved package, add `MUI_PAGE_LICENSE` pointing at the approved final text, and make acceptance a required step. Do not wire the draft text.
+- The installer does **not** show a licence page. The EULA draft is unapproved; do not wire it in. If the owner decides an EULA page is required, add `MUI_PAGE_LICENSE` pointing at the approved final text.
 
 ## 3. Verification after packaging (before any sharing)
 
@@ -80,7 +80,7 @@ These checks are not native acceptance. Native acceptance is section 5.
 - **Before public distribution**, archive the full licence text for each package and the copyright lines from upstream. Run `npx license-checker --production` (or equivalent) at packaging time and attach its output to the release.
 - The WebView2 licence and notice ship in the package (`WEBVIEW2-LICENSE.txt`, `WEBVIEW2-NOTICE.txt`); the NSIS licence ships as `NSIS-COPYING.txt`.
 - The app shows third-party brand marks (agent logos under `dist/agent-logos`, ComfyUI branding, product names). Their use is nominative and needs a review of brand-use permissions before public release; this is not a licence grant.
-- Do not describe the software as open-source unless the owner has chosen an open-source licence.
+- EZ AI's own code is MIT-licensed (`LICENSE`), so describing it as open source is accurate. Third-party components keep their own licences.
 
 ## 5. Native acceptance checklist
 
@@ -134,7 +134,7 @@ Run on a disposable Windows 11 VM or a new standard user profile. Record each re
 ## 6. Decisions
 
 **Recorded by the owner (2026-10-23):**
-- **Licence:** proprietary end-user licence agreement, free distribution for now, paid versions possible later. Draft: [docs/EULA-DRAFT.md](docs/EULA-DRAFT.md). Not final; needs legal review and written approval. Do not add a `LICENSE` file or show the EULA in the installer until approved.
+- **Licence:** MIT for EZ AI's own code (`LICENSE`, present in the GitHub repository). The earlier proprietary EULA draft ([docs/EULA-DRAFT.md](docs/EULA-DRAFT.md)) is historical and unapproved. Owner decision: confirm MIT as the final licence before packaging.
 - **Brand:** Aeru Creations. No verified publisher identity and no registered legal business name is claimed.
 - **Signing:** none. Beta packages are unsigned; see the disclosure in section 7. Signing support stays available for future releases.
 - **Packaging:** not authorized. No Production package, installer, install or publication.
@@ -142,7 +142,7 @@ Run on a disposable Windows 11 VM or a new standard user profile. Record each re
 
 **Still open (for the owner):**
 
-1. **Licence.** The repo has no `LICENSE`. Options for an independently developed application distributed as a compiled binary:
+1. **Licence.** The repo has an MIT `LICENSE`. Owner decision: confirm it, or choose one of the other options below for the compiled binary:
    - *Proprietary, all rights reserved, with an end-user licence agreement.* Matches binary-only distribution. Needs written EULA text covering use, warranty disclaimer, liability limits and third-party notices.
    - *Source-available* (for example a non-commercial licence). Lets people read the source but limits commercial use.
    - *Permissive open source* (MIT or Apache-2.0). Allows reuse, requires notices in the binary distribution. Apache-2.0 includes an explicit patent grant. Only choose this if you want the source public.
@@ -177,7 +177,7 @@ Verify the SmartScreen and User Account Control wording against the actual behav
 - The older `RELEASE_CANDIDATE_*` documents and `RELEASE_NOTES_1.0.0-beta.1.md` describe beta.1 and must be updated for any release.
 - Historical Git commits still contain the owner's machine path; the current tree does not.
 - The two deleted legacy root binaries are uncommitted owner changes; leave them to the owner.
-- No `LICENSE` file exists; this is intentional until the owner decides.
+- The MIT `LICENSE` file exists. The owner should confirm it before packaging.
 
 ## 9. Manifest and checksums
 
