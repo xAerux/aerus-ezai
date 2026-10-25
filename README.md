@@ -30,6 +30,8 @@ Whether you're just getting started with AI or already building your own project
 
 Some features depend on external applications being installed and may require an internet connection.
 
+---
+
 ## 🛠️ Meet the Aerus Tools
 
 ### 📊 Aerus AI Usage HUD
@@ -81,7 +83,7 @@ Both Crunch tools are intended to help users learn and configure supported featu
 
 The installer includes the EZ AI desktop application, Aerus AI Usage HUD, and Aerus SDM.
 
-**⚠️ Windows Security Notice**
+### ⚠️ Windows Security Notice
 
 AERUS AI EZ is independently developed and currently distributed without a code-signing certificate. Windows may show an unknown-publisher or SmartScreen warning.
 
@@ -128,9 +130,17 @@ Feedback and testing are appreciated as the project continues to improve.
 
 **Current release:** `v1.0.0-beta.6`
 
+Have an idea, found a bug, or have a question? Feel free to share feedback through the project's [GitHub repository](https://github.com/xAerux/aerus-ezai).
+
 ---
 
-## Licence & Third-Party Branding
+## ⚖️ MIT License & Third-Party Branding
+
+**AERUS AI EZ is licensed under the [MIT License](https://github.com/xAerux/aerus-ezai/blob/main/LICENSE).**
+
+The MIT License permits use, modification, distribution, and commercial use of the material covered by that license, subject to its terms.
+
+### Third-Party Disclaimer
 
 AERUS AI EZ is an independent software project developed by Aeru Creations.
 
@@ -144,7 +154,11 @@ Aeru Creations does not claim ownership of third-party applications, trademarks,
 
 The project's MIT License applies to the material covered by that license. Third-party software, trademarks, logos, and other assets remain subject to their applicable terms and permissions.
 
-This disclaimer does not itself grant permission to redistribute third-party assets.
+**This disclaimer does not itself grant permission to redistribute third-party assets.**
+
+See [THIRD_PARTY_NOTICES.md](https://github.com/xAerux/aerus-ezai/blob/main/THIRD_PARTY_NOTICES.md) for third-party acknowledgments, licensing information, and asset notes.
+
+---
 
 ## ❤️ Built by Aeru Creations
 
@@ -166,6 +180,5 @@ And this is only the beginning.
 
 **© 2026 Aeru Creations.**
 
-EZ AI's own code is licensed under the [MIT License](LICENSE). Third-party software and services remain the property of their respective owners and keep their own licence terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for acknowledgments, licensing information and asset notes.
-
+Third-party software and services remain the property of their respective owners and retain their applicable license terms.
 
