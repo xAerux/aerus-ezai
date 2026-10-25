@@ -1,4 +1,8 @@
 <img width="1529" height="1348" alt="EZ AI RELEASE" src="https://github.com/user-attachments/assets/40217e46-9bd4-4429-a6d3-e6f5d09770b9" />
+![Version](https://img.shields.io/badge/Version-1.0.0-00CED1?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=for-the-badge&logo=windows)
+![License](https://img.shields.io/badge/License-MIT-gold?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Released-brightgreen?style=for-the-badge)
 
 # ⚡ AERUS AI EZ
 
