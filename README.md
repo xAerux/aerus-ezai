@@ -1,4 +1,3 @@
-# Aerus EZ AI 
 <img width="1529" height="1348" alt="EZ AI RELEASE" src="https://github.com/user-attachments/assets/40217e46-9bd4-4429-a6d3-e6f5d09770b9" />
 
 # ⚡ AERUS AI EZ
